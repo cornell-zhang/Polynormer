@@ -1,9 +1,6 @@
----
-**NOTE**
-
-The detailed description of our source code will be provided soon (by March 23rd). 
-
----
+Note
+------------
+The detailed description and the mini-batch version of our source code will be provided soon (by March 23rd). If you're interested in experimenting with the 10 small graphs used in our paper, please follow the instructions below. 
 
 Requirements
 ------------
