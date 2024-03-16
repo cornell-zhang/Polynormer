@@ -3,6 +3,10 @@ Polynormer
 
 [![arXiv](https://img.shields.io/badge/arXiv-2403.01232-b31b1b.svg)](https://arxiv.org/abs/2403.01232)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/polynormer-polynomial-expressive-graph/node-classification-on-roman-empire)](https://paperswithcode.com/sota/node-classification-on-roman-empire?p=polynormer-polynomial-expressive-graph)
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/polynormer-polynomial-expressive-graph/node-classification-on-amazon-ratings)](https://paperswithcode.com/sota/node-classification-on-amazon-ratings?p=polynormer-polynomial-expressive-graph)
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/polynormer-polynomial-expressive-graph/node-classification-on-minesweeper)](https://paperswithcode.com/sota/node-classification-on-minesweeper?p=polynormer-polynomial-expressive-graph)
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/polynormer-polynomial-expressive-graph/node-classification-on-tolokers)](https://paperswithcode.com/sota/node-classification-on-tolokers?p=polynormer-polynomial-expressive-graph)
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/polynormer-polynomial-expressive-graph/node-classification-on-questions)](https://paperswithcode.com/sota/node-classification-on-questions?p=polynormer-polynomial-expressive-graph)
 
 Polynormer is an expressive graph transformer (GT) that adopts a local-to-global attention scheme with linear complexity. Particularly, the proposed attention module possesses high expressivity in learning equivariant polynomial functions, which map input node features into output node representations. Our experimental results showcase that Polynormer outperforms competitive GNN and GT baselines on a wide range of mainstream datasets, including homophilic graphs, heterophilic graphs, and large graphs with millions of nodes. More details are available in [our paper](https://arxiv.org/abs/2403.01232).
 
