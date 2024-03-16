@@ -3,9 +3,11 @@ Polynormer
 
 [![arXiv](https://img.shields.io/badge/arXiv-2403.01232-b31b1b.svg)](https://arxiv.org/abs/2403.01232)
 
-Polynormer is an expressive graph transformer (GT) that adopts a local-to-global attention scheme with linear complexity. Particularly, the proposed attention module possesses high expressivity in learning equivariant polynomial functions, which map input node features into output node representations. Our experimental results showcase that Polynormer outperforms competitive GNN and GT baselines on a wide range of mainstream datasets, including homophilic graphs, heterophilic graphs, and large graphs with millions of nodes. More details are available in [our paper](https://arxiv.org/abs/2403.01232)
+Polynormer is an expressive graph transformer (GT) that adopts a local-to-global attention scheme with linear complexity. Particularly, the proposed attention module possesses high expressivity in learning equivariant polynomial functions, which map input node features into output node representations. Our experimental results showcase that Polynormer outperforms competitive GNN and GT baselines on a wide range of mainstream datasets, including homophilic graphs, heterophilic graphs, and large graphs with millions of nodes. More details are available in [our paper](https://arxiv.org/abs/2403.01232).
 
-![An overview of the Polynormer architecture](/figures/Polynormer.png)
+| ![Polynormer.png](/figures/Polynormer.png) | 
+|:--:| 
+| An overview of the Polynormer architecture |
 
 Citation
 ------------
