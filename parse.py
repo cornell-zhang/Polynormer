@@ -1,7 +1,7 @@
 from model import Polynormer
 
 def parse_method(args, n, c, d, device):
-    model = Polynormer(d, args.hidden_channels, c, local_layers=args.local_layers, global_layers=args.global_layers, in_dropout=args.in_dropout, dropout=args.dropout, heads=args.num_heads, beta=args.beta).to(device)
+    model = Polynormer(d, args.hidden_channels, c, local_layers=args.local_layers, global_layers=args.global_layers, in_dropout=args.in_dropout, dropout=args.dropout, global_dropout=args.global_dropout, heads=args.num_heads, beta=args.beta).to(device)
     return model
 
 
@@ -39,6 +39,7 @@ def parser_add_main_args(parser):
     parser.add_argument('--weight_decay', type=float, default=5e-4)
     parser.add_argument('--in_dropout', type=float, default=0.15)
     parser.add_argument('--dropout', type=float, default=0.5)
+    parser.add_argument('--global_dropout', type=float, default=None)
 
     # display and utility
     parser.add_argument('--display_step', type=int,

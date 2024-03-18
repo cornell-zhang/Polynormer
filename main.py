@@ -26,6 +26,8 @@ def fix_seed(seed=42):
 parser = argparse.ArgumentParser(description='Training Pipeline for Node Classification')
 parser_add_main_args(parser)
 args = parser.parse_args()
+if not args.global_dropout:
+    args.global_dropout = args.dropout
 print(args)
 
 fix_seed(args.seed)

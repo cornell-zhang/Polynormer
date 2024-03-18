@@ -31,6 +31,7 @@ class GlobalAttn(torch.nn.Module):
             self.k_lins.append(torch.nn.Linear(heads*hidden_channels, heads*hidden_channels))
             self.v_lins.append(torch.nn.Linear(heads*hidden_channels, heads*hidden_channels))
             self.lns.append(torch.nn.LayerNorm(heads*hidden_channels))
+        self.lin_out = torch.nn.Linear(heads*hidden_channels, heads*hidden_channels)
 
     def reset_parameters(self):
         for h_lin in self.h_lins:
@@ -48,6 +49,7 @@ class GlobalAttn(torch.nn.Module):
             torch.nn.init.xavier_normal_(self.betas)
         else:
             torch.nn.init.constant_(self.betas, self.beta)
+        self.lin_out.reset_parameters()
 
     def forward(self, x):
         seq_len, _ = x.size()
@@ -75,6 +77,7 @@ class GlobalAttn(torch.nn.Module):
                 beta = self.betas[i].unsqueeze(0)
             x = (num/den).reshape(seq_len, -1)
             x = self.lns[i](x) * (h+beta)
+            x = F.relu(self.lin_out(x))
             x = F.dropout(x, p=self.dropout, training=self.training)
 
         return x
@@ -82,7 +85,7 @@ class GlobalAttn(torch.nn.Module):
 
 
 class Polynormer(torch.nn.Module):
-    def __init__(self, in_channels, hidden_channels, out_channels, local_layers=3, global_layers=2, in_dropout=0.15, dropout=0.5, heads=1, beta=-1):
+    def __init__(self, in_channels, hidden_channels, out_channels, local_layers=3, global_layers=2, in_dropout=0.15, dropout=0.5, global_dropout=0.5, heads=1, beta=-1):
         super(Polynormer, self).__init__()
 
         self._global = False
@@ -107,7 +110,7 @@ class Polynormer(torch.nn.Module):
 
         self.lin_in = torch.nn.Linear(in_channels, heads*hidden_channels)
         self.ln = torch.nn.LayerNorm(heads*hidden_channels)
-        self.global_attn = GlobalAttn(hidden_channels, heads, global_layers, beta, dropout)
+        self.global_attn = GlobalAttn(hidden_channels, heads, global_layers, beta, global_dropout)
         self.pred_local = torch.nn.Linear(heads*hidden_channels, out_channels)
         self.pred_global = torch.nn.Linear(heads*hidden_channels, out_channels)
 
@@ -139,13 +142,15 @@ class Polynormer(torch.nn.Module):
         x_local = 0
         for i, local_conv in enumerate(self.local_convs):
             h = self.h_lins[i](x)
+            h = F.relu(h)
             x = local_conv(x, edge_index) + self.lins[i](x)
+            x = F.relu(x)
             x = F.dropout(x, p=self.dropout, training=self.training)
             if self.beta < 0:
                 beta = F.sigmoid(self.betas[i]).unsqueeze(0)
             else:
                 beta = self.betas[i].unsqueeze(0)
-            x = self.lns[i](h*x) + beta*x
+            x = (1-beta)*self.lns[i](h*x) + beta*x
             x_local = x_local + x
 
         ## equivariant global attention

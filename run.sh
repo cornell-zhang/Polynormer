@@ -1,6 +1,6 @@
 
 ## heterophilic datasets
-python main.py --dataset roman-empire --hidden_channels 64 --local_epochs 100 --global_epochs 2500 --lr 0.001 --runs 1 --local_layers 10 --global_layers 2 --weight_decay 0.0 --dropout 0.3 --in_dropout 0.15 --num_heads 8 --device 0 --save_model --beta 0.5
+python main.py --dataset roman-empire --hidden_channels 64 --local_epochs 100 --global_epochs 2500 --lr 0.001 --runs 1 --local_layers 10 --global_layers 2 --weight_decay 0.0 --dropout 0.3 --global_dropout 0.5 --in_dropout 0.15 --num_heads 8 --device 0 --save_model --beta 0.5
 python main.py --dataset amazon-ratings --hidden_channels 256 --local_epochs 200 --global_epochs 2500 --lr 0.001 --runs 1 --local_layers 10 --global_layers 1 --weight_decay 0.0 --dropout 0.3 --in_dropout 0.2 --num_heads 2 --device 0 --save_model
 python main.py --dataset minesweeper --hidden_channels 64 --local_epochs 100 --global_epochs 2000 --lr 0.001 --runs 1 --local_layers 10 --global_layers 3 --weight_decay 0.0 --dropout 0.3 --in_dropout 0.2 --num_heads 8 --metric rocauc --device 0 --save_model
 python main.py --dataset tolokers --hidden_channels 64 --local_epochs 100 --global_epochs 800 --lr 0.001 --runs 1 --local_layers 7 --global_layers 2 --weight_decay 0.0 --dropout 0.5 --in_dropout 0.2 --num_heads 16 --metric rocauc --device 0 --save_model --beta 0.1
