@@ -91,6 +91,10 @@ class Polynormer(torch.nn.Module):
         self._global = False
         self.in_drop = in_dropout
         self.dropout = dropout
+
+        ## different initialization strategies
+        ## beta can also be fixed to a constant to reduce GPU memory usage
+        ## e.g., fixing beta to be 0.1 on tolokers makes it fit into A6000 GPU memory (48GB)
         self.beta = beta
         if self.beta < 0:
             self.betas = torch.nn.Parameter(torch.zeros(local_layers,heads*hidden_channels))
