@@ -85,16 +85,15 @@ class GlobalAttn(torch.nn.Module):
 
 
 class Polynormer(torch.nn.Module):
-    def __init__(self, in_channels, hidden_channels, out_channels, local_layers=3, global_layers=2, in_dropout=0.15, dropout=0.5, global_dropout=0.5, heads=1, beta=-1):
+    def __init__(self, in_channels, hidden_channels, out_channels, local_layers=3, global_layers=2, in_dropout=0.15, dropout=0.5, global_dropout=0.5, heads=1, beta=-1, pre_ln=False):
         super(Polynormer, self).__init__()
 
         self._global = False
         self.in_drop = in_dropout
         self.dropout = dropout
+        self.pre_ln = pre_ln
 
-        ## different initialization strategies
-        ## beta can also be fixed to a constant to reduce GPU memory usage
-        ## e.g., fixing beta to be 0.1 on tolokers makes it fit into A6000 GPU memory (48GB)
+        ## Two initialization strategies on beta
         self.beta = beta
         if self.beta < 0:
             self.betas = torch.nn.Parameter(torch.zeros(local_layers,heads*hidden_channels))
@@ -105,12 +104,17 @@ class Polynormer(torch.nn.Module):
         self.local_convs = torch.nn.ModuleList()
         self.lins = torch.nn.ModuleList()
         self.lns = torch.nn.ModuleList()
+        if self.pre_ln:
+            self.pre_lns = torch.nn.ModuleList()
+
         for _ in range(local_layers):
             self.h_lins.append(torch.nn.Linear(heads*hidden_channels, heads*hidden_channels))
             self.local_convs.append(GATConv(hidden_channels*heads, hidden_channels, heads=heads,
                 concat=True, add_self_loops=False, bias=False))
             self.lins.append(torch.nn.Linear(heads*hidden_channels, heads*hidden_channels))
             self.lns.append(torch.nn.LayerNorm(heads*hidden_channels))
+            if self.pre_ln:
+                self.pre_lns.append(torch.nn.LayerNorm(heads*hidden_channels))
 
         self.lin_in = torch.nn.Linear(in_channels, heads*hidden_channels)
         self.ln = torch.nn.LayerNorm(heads*hidden_channels)
@@ -127,6 +131,9 @@ class Polynormer(torch.nn.Module):
             h_lin.reset_parameters()
         for ln in self.lns:
             ln.reset_parameters()
+        if self.pre_ln:
+            for p_ln in self.pre_lns:
+                p_ln.reset_parameters()
         self.lin_in.reset_parameters()
         self.ln.reset_parameters()
         self.global_attn.reset_parameters()
@@ -145,6 +152,8 @@ class Polynormer(torch.nn.Module):
         ## equivariant local attention
         x_local = 0
         for i, local_conv in enumerate(self.local_convs):
+            if self.pre_ln:
+                x = self.pre_lns[i](x)
             h = self.h_lins[i](x)
             h = F.relu(h)
             x = local_conv(x, edge_index) + self.lins[i](x)
