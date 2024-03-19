@@ -48,6 +48,8 @@ conda clean --all
 
 Running Polynormer
 ------------
+### Note
+We provide the implementation of Polynormer with ReLU. If you would like to see the performance of Polynormer alone, please comment out all ReLU functions.
 ```bash
 conda activate polynormer
 
