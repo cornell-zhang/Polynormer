@@ -1,7 +1,9 @@
 from model import Polynormer
 
 def parse_method(args, n, c, d, device):
-    model = Polynormer(d, args.hidden_channels, c, local_layers=args.local_layers, global_layers=args.global_layers, in_dropout=args.in_dropout, dropout=args.dropout, global_dropout=args.global_dropout, heads=args.num_heads, beta=args.beta, pre_ln=args.pre_ln).to(device)
+    model = Polynormer(d, args.hidden_channels, c, local_layers=args.local_layers, global_layers=args.global_layers,
+            in_dropout=args.in_dropout, dropout=args.dropout, global_dropout=args.global_dropout,
+            heads=args.num_heads, beta=args.beta, pre_ln=args.pre_ln).to(device)
     return model
 
 

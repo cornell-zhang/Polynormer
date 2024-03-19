@@ -85,7 +85,8 @@ class GlobalAttn(torch.nn.Module):
 
 
 class Polynormer(torch.nn.Module):
-    def __init__(self, in_channels, hidden_channels, out_channels, local_layers=3, global_layers=2, in_dropout=0.15, dropout=0.5, global_dropout=0.5, heads=1, beta=-1, pre_ln=False):
+    def __init__(self, in_channels, hidden_channels, out_channels, local_layers=3, global_layers=2,
+            in_dropout=0.15, dropout=0.5, global_dropout=0.5, heads=1, beta=-1, pre_ln=False):
         super(Polynormer, self).__init__()
 
         self._global = False
