@@ -6,13 +6,13 @@ Running Polynormer on large graphs
 ```bash
 conda activate polynormer
 
-# Running experiment on ogbn-arxiv (full batch training)
+# running experiment on ogbn-arxiv (full batch training)
 bash arxiv.sh
 
-# Running experiment on ogbn-products (mini-batch training)
+# running experiment on ogbn-products (mini-batch training)
 bash products.sh
 
-# Running experiment on pokec (mini-batch training)
+# running experiment on pokec (mini-batch training)
 bash pokec.sh
 ```
 

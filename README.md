@@ -44,8 +44,8 @@ conda create -n polynormer python=3.9
 conda activate polynormer
 conda install pytorch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2 pytorch-cuda=11.7 -c pytorch -c nvidia
 conda install pyg -c pyg
-pip install ogb # Only required for ogb graphs
-pip install gdown # Only required for pokec
+pip install ogb # only required for ogb graphs
+pip install gdown # only required for pokec
 
 conda clean --all
 ```
@@ -57,13 +57,13 @@ We provide the implementation of Polynormer with ReLU. If you would like to see 
 ```bash
 conda activate polynormer
 
-# Running a single experiment on roman-empire
+# running a single experiment on roman-empire
 python main.py --dataset roman-empire --hidden_channels 64 --local_epochs 100 --global_epochs 2500 --lr 0.001 --runs 1 --local_layers 10 --global_layers 2 --weight_decay 0.0 --dropout 0.3 --global_dropout 0.5 --in_dropout 0.15 --num_heads 8 --save_model --beta 0.5 --device 0
 
-# Running all experiments with full batch training
+# running all experiments with full batch training
 bash run.sh
 
-# Running all experiments with mini-batch training (only required on ogbn-products and pokec)
+# running all experiments with mini-batch training (only required on ogbn-products and pokec)
 cd large_graph_exp
 bash products.sh
 bash pokec.sh
