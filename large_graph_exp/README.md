@@ -30,7 +30,7 @@ Expected results
 | :-----------: |:-------------:| :-------:| :----------:|
 | ogbn-arxiv      | Accuracy          | 72.41 (GOAT)       | 73.45        |
 | ogbn-products      | Accuracy          | 82.00 (GOAT)       | 83.82        |
-| pokec      | Accuracy          | 82.04 (LINKX)       | 85.97        |
+| pokec      | Accuracy          | 82.04 (LINKX)       | 86.03        |
 
 ### Note
 We provide the results of Polynormer with ReLU for the first run. Thus, the above results are slightly different from the averaged results in our paper.
