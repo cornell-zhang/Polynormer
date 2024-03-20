@@ -1,6 +1,7 @@
 import torch
 import torch_geometric.transforms as T
 from torch_geometric.datasets import Amazon, Coauthor, HeterophilousGraphDataset, WikiCS
+from ogb.nodeproppred import NodePropPredDataset
 
 import numpy as np
 import scipy.sparse as sp
@@ -68,6 +69,10 @@ def load_dataset(data_dir, dataname, sub_dataname=''):
         dataset = load_hetero_dataset(data_dir, dataname)
     elif dataname == 'wikics':
         dataset = load_wikics_dataset(data_dir)
+    elif dataname in ('ogbn-arxiv', 'ogbn-products'):
+        dataset = load_ogb_dataset(data_dir, dataname)
+    elif dataname == 'pokec':
+        dataset = load_pokec_mat(data_dir)
     else:
         raise ValueError('Invalid dataname')
     return dataset
@@ -167,4 +172,42 @@ def load_coauthor_dataset(data_dir, name):
                      'num_nodes': num_nodes}
     dataset.label = label
 
+    return dataset
+
+def load_ogb_dataset(data_dir, name):
+    dataset = NCDataset(name)
+    ogb_dataset = NodePropPredDataset(name=name, root=f'{data_dir}/ogb')
+    dataset.graph = ogb_dataset.graph
+    dataset.graph['edge_index'] = torch.as_tensor(dataset.graph['edge_index'])
+    dataset.graph['node_feat'] = torch.as_tensor(dataset.graph['node_feat'])
+
+    def ogb_idx_to_tensor():
+        split_idx = ogb_dataset.get_idx_split()
+        tensor_split_idx = {key: torch.as_tensor(
+            split_idx[key]) for key in split_idx}
+        return tensor_split_idx
+    dataset.load_fixed_splits = ogb_idx_to_tensor  # ogb_dataset.get_idx_split
+    dataset.label = torch.as_tensor(ogb_dataset.labels).reshape(-1, 1)
+    return dataset
+
+def load_pokec_mat(data_dir):
+    """ requires pokec.mat """
+    if not path.exists(f'{data_dir}/pokec/pokec.mat'):
+        gdd.download_file_from_google_drive(
+            file_id= dataset_drive_url['pokec'], \
+            dest_path=f'{data_dir}/pokec/pokec.mat', showsize=True)
+
+    fulldata = scipy.io.loadmat(f'{data_dir}/pokec/pokec.mat')
+
+    dataset = NCDataset('pokec')
+    edge_index = torch.tensor(fulldata['edge_index'], dtype=torch.long)
+    node_feat = torch.tensor(fulldata['node_feat']).float()
+    num_nodes = int(fulldata['num_nodes'])
+    dataset.graph = {'edge_index': edge_index,
+                     'edge_feat': None,
+                     'node_feat': node_feat,
+                     'num_nodes': num_nodes}
+
+    label = fulldata['label'].flatten()
+    dataset.label = torch.tensor(label, dtype=torch.long)
     return dataset

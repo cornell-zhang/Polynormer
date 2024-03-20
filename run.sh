@@ -1,4 +1,4 @@
-GPU=0
+GPU=2
 
 ## heterophilic datasets
 python main.py --dataset roman-empire --hidden_channels 64 --local_epochs 100 --global_epochs 2500 --lr 0.001 --runs 1 --local_layers 10 --global_layers 2 --weight_decay 0.0 --dropout 0.3 --global_dropout 0.5 --in_dropout 0.15 --num_heads 8 --device $GPU --save_model --beta 0.5

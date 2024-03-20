@@ -9,7 +9,7 @@ from torch_geometric.utils import to_undirected, remove_self_loops, add_self_loo
 from logger import *
 from dataset import load_dataset
 from data_utils import eval_acc, eval_rocauc, load_fixed_splits
-from eval import evaluate
+from eval import *
 from parse import parse_method, parser_add_main_args
 
 

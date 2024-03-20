@@ -60,7 +60,7 @@ python main.py --dataset roman-empire --hidden_channels 64 --local_epochs 100 --
 bash run.sh
 
 # Running all experiments with mini-batch training (only required on large graphs)
-cd mini-batch
+cd large_graph_exp
 ```
 
 Statistics of datasets used in our experiments
