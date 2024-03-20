@@ -18,7 +18,7 @@ def parser_add_main_args(parser):
     parser.add_argument('--cpu', action='store_true')
     parser.add_argument('--local_epochs', type=int, default=1000,
                         help='warmup epochs for local attention')
-    parser.add_argument('--global_epochs', type=int, default=1000,
+    parser.add_argument('--global_epochs', type=int, default=0,
                         help='epochs for local-to-global attention')
     parser.add_argument('--batch_size', type=int, default=100000,
                         help='batch size for mini-batch training')
