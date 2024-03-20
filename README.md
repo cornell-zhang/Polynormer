@@ -44,8 +44,8 @@ conda create -n polynormer python=3.9
 conda activate polynormer
 conda install pytorch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2 pytorch-cuda=11.7 -c pytorch -c nvidia
 conda install pyg -c pyg
-pip install ogb (only required for ogb graphs)
-pip install gdown (only required for pokec)
+pip install ogb # Only required for ogb graphs
+pip install gdown # Only required for pokec
 
 conda clean --all
 ```

@@ -33,4 +33,4 @@ Expected results
 | pokec      | Accuracy          | 82.04 (LINKX)       | 85.97        |
 
 ### Note
-We provide the results of Polynormer with ReLU for the first run. Thus, the above results are slightly different from the averaged results over 10 runs in our paper.
+We provide the results of Polynormer with ReLU for the first run. Thus, the above results are slightly different from the averaged results in our paper.
