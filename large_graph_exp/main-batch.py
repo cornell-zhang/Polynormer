@@ -99,7 +99,7 @@ for run in range(args.runs):
             if args.save_model:
                 model, optimizer = load_model(args, model, optimizer, run)
             model._global = True
-        #model.to(device)
+        model.to(device)
         model.train()
 
         loss_train = 0

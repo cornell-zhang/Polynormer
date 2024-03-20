@@ -5,6 +5,12 @@ from ogb.nodeproppred import NodePropPredDataset
 
 import numpy as np
 import scipy.sparse as sp
+from os import path
+#from google_drive_downloader import GoogleDriveDownloader as gdd
+import gdown
+import scipy
+
+from data_utils import dataset_drive_url
 
 
 class NCDataset(object):
@@ -193,9 +199,12 @@ def load_ogb_dataset(data_dir, name):
 def load_pokec_mat(data_dir):
     """ requires pokec.mat """
     if not path.exists(f'{data_dir}/pokec/pokec.mat'):
-        gdd.download_file_from_google_drive(
-            file_id= dataset_drive_url['pokec'], \
-            dest_path=f'{data_dir}/pokec/pokec.mat', showsize=True)
+        drive_id = '1575QYJwJlj7AWuOKMlwVmMz8FcslUncu'
+        gdown.download(id=drive_id, output="data/pokec/")
+        #import sys; sys.exit()
+        #gdd.download_file_from_google_drive(
+        #    file_id= drive_id, \
+        #    dest_path=f'{data_dir}/pokec/pokec.mat', showsize=True)
 
     fulldata = scipy.io.loadmat(f'{data_dir}/pokec/pokec.mat')
 

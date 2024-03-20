@@ -34,6 +34,8 @@ Requirements
 * python 3.9
 * pytorch 2.0 (CUDA 11.7)
 * torch_geometric 2.3
+* ogb 1.3.6
+* gdown
 
 Python environment setup with Conda (Linux)
 ------------
@@ -42,6 +44,8 @@ conda create -n polynormer python=3.9
 conda activate polynormer
 conda install pytorch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2 pytorch-cuda=11.7 -c pytorch -c nvidia
 conda install pyg -c pyg
+pip install ogb (only required for ogb graphs)
+pip install gdown (only required for pokec)
 
 conda clean --all
 ```
@@ -54,19 +58,20 @@ We provide the implementation of Polynormer with ReLU. If you would like to see 
 conda activate polynormer
 
 # Running a single experiment on roman-empire
-python main.py --dataset roman-empire --hidden_channels 64 --local_epochs 100 --global_epochs 2500 --lr 0.001 --runs 1 --local_layers 10 --global_layers 2 --weight_decay 0.0 --dropout 0.3 --global_dropout 0.5 --in_dropout 0.15 --num_heads 8 --device $GPU --save_model --beta 0.5
+python main.py --dataset roman-empire --hidden_channels 64 --local_epochs 100 --global_epochs 2500 --lr 0.001 --runs 1 --local_layers 10 --global_layers 2 --weight_decay 0.0 --dropout 0.3 --global_dropout 0.5 --in_dropout 0.15 --num_heads 8 --save_model --beta 0.5 --device 0
 
 # Running all experiments with full batch training
 bash run.sh
 
-# Running all experiments with mini-batch training (only required on large graphs)
+# Running all experiments with mini-batch training (only required on ogbn-products and pokec)
 cd large_graph_exp
+bash products.sh
+bash pokec.sh
 ```
 
-Statistics of datasets used in our experiments
+Dataset statistics
 -------
-### 10 (relatively) small graphs
-| Dataset        | Type      | #Nodes  | #Edges  |
+| Dataset       | Type      | #Nodes  | #Edges  |
 | :-----------: |:-------------:| :-------:| :----------:|
 | Computer      | Homophily          | 13,752       | 245,861        |
 | Photo      | Homophily          | 7,650       | 119,081        |
@@ -79,10 +84,28 @@ Statistics of datasets used in our experiments
 | tolokers      | Heterophily          | 11,758       | 519,000        |
 | questions      | Heterophily          | 48,921       | 153,540        |
 
-### 3 large graphs
-| Dataset        | Type      | #Nodes  | #Edges  |
-| :-----------: |:-------------:| :-------:| :----------:|
-| ogbn-arxiv      | Homophily          | 169, 343       | 1,166,243        |
-| ogbn-products      | Homophily          | 2,449,029       | 61,859,140        |
-| pokec      | Heterophily          | 1,632,803       | 30,622,564        |
 
+Expected results
+-------
+| Dataset       |  Metric  |   Best baseline from our paper  |  Polynormer-r (first run)  |
+| :-----------: |:-------------:| :-------:| :----------:|
+| Computer      | Accuracy          | 92.03 (OrderedGNN)       | 94.07        |
+| Photo      | Accuracy          | 95.49 (NAGphormer)       | 96.67        |
+| CS      | Accuracy          | 95.75 (NAGphormer)       | 95.28        |
+| Physics      | Accuracy          | 97.34 (NAGphormer)       | 97.14        |
+| WikiCS      | Accuracy          | 79.01 (OrderedGNN)       |  81.20        |
+| roman-empire      | Accuracy          | 91.23 (DIR-GNN)       | 92.48        |
+| amazon-ratings      | Accuracy          | 53.63 (GraphSAGE)       | 55.04        |
+| minesweeper      | ROCAUC          | 93.91 (GAT-sep)       | 97.19        |
+| tolokers      | ROCAUC          | 83.78 (GAT-sep)       | 85.15        |
+| questions      | ROCAUC          | 78.86 (FSGNN)       | 78.35        |
+
+### Note
+We provide the results of Polynormer with ReLU for the first run. Thus, the above results are slightly different from the averaged results over 10 runs in our paper.
+
+Experiments on Large Graphs
+-------
+```
+1. cd large_graph_exp
+2. see README.md for instructions
+```
