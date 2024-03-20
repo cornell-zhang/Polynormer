@@ -14,21 +14,6 @@ Polynormer is an expressive graph transformer (GT) that adopts a local-to-global
 |:--:| 
 | An overview of the Polynormer architecture |
 
-Citation
-------------
-If you use Polynormer in your research, please cite our work
-published in ICLR'24.
-
-```
-@inproceedings{deng2024polynormer,
-  title={Polynormer: Polynomial-Expressive Graph Transformer in Linear Time},
-  author={Chenhui Deng and Zichao Yue and Zhiru Zhang},
-  booktitle={The Twelfth International Conference on Learning Representations},
-  year={2024},
-  url={https://openreview.net/forum?id=hmv1LpNfXa}
-}
-```
-
 Requirements
 ------------
 * python 3.9
@@ -109,3 +94,19 @@ Experiments on Large Graphs
 1. cd large_graph_exp
 2. see README.md for instructions
 ```
+
+Citation
+------------
+If you use Polynormer in your research, please cite our work
+published in ICLR'24.
+
+```
+@inproceedings{deng2024polynormer,
+  title={Polynormer: Polynomial-Expressive Graph Transformer in Linear Time},
+  author={Chenhui Deng and Zichao Yue and Zhiru Zhang},
+  booktitle={The Twelfth International Conference on Learning Representations},
+  year={2024},
+  url={https://openreview.net/forum?id=hmv1LpNfXa}
+}
+```
+
