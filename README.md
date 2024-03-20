@@ -63,7 +63,7 @@ python main.py --dataset roman-empire --hidden_channels 64 --local_epochs 100 --
 # running all experiments with full batch training
 bash run.sh
 
-# running all experiments with mini-batch training (only required on ogbn-products and pokec)
+# running all experiments with mini-batch training (only required for ogbn-products and pokec)
 cd large_graph_exp
 bash products.sh
 bash pokec.sh
