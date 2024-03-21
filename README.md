@@ -13,7 +13,7 @@ Polynormer is an expressive graph transformer (GT) that adopts a local-to-global
 
 | ![Polynormer.png](/figures/Polynormer.png) | 
 |:--:| 
-| An overview of the Polynormer architecture |
+| Figure1: An overview of the Polynormer architecture. |
 
 Requirements
 ------------
@@ -115,5 +115,5 @@ Visualization on Polynormer attention scores
 -------
 | ![visualization.png](/figures/visualization.png) | 
 |:--:| 
-| Visualization on the importance of nodes (columns) to each target node (row) --- Higher heatmap values indicate greater importance; Both subfigures (a) and (b) consider nodes are important if they share the same label as the target node, while (a) has an additional constraint that these nodes are at most $5$-hop away from the target node; Subfigure (c) measures node importance based on the corresponding global attention scores in Polynormer. |
+| Figure 2: Visualization on the importance of nodes (columns) to each target node (row). |
 
