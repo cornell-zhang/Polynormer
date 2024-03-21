@@ -96,6 +96,17 @@ Experiments on Large Graphs
 2. see README.md for instructions
 ```
 
+
+Visualization on Polynormer attention scores
+-------
+| ![visualization.png](/figures/visualization.png) | 
+|:--:| 
+| Figure 2: Visualization on the importance of nodes (columns) to each target node (row). |
+
+In Figure 2, higher heatmap values indicate greater importance. Both Figures 2(a) and 2(b) consider nodes are important if they share the same label as the target node, while (a) has an additional constraint that these nodes are at most 5-hop away from the target node; Figure 2(c) measures node importance based on the corresponding global attention scores in Polynormer, which clearly showcases that Polynormer attention scores effectively differentiate those globally important nodes from unimportant ones.
+
+
+
 Citation
 ------------
 If you use Polynormer in your research, please cite our work
@@ -110,10 +121,4 @@ published in ICLR'24.
   url={https://openreview.net/forum?id=hmv1LpNfXa}
 }
 ```
-
-Visualization on Polynormer attention scores
--------
-| ![visualization.png](/figures/visualization.png) | 
-|:--:| 
-| Figure 2: Visualization on the importance of nodes (columns) to each target node (row). |
 
