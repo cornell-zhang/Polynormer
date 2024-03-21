@@ -103,7 +103,7 @@ Visualization on Polynormer attention scores
 |:--:| 
 | Figure 2: Visualization on the importance of nodes (columns) to each target node (row). |
 
-In Figure 2, higher heatmap values indicate greater importance. Both Figures 2(a) and 2(b) consider nodes are important if they share the same label as the target node, while (a) has an additional constraint that these nodes are at most 5-hop away from the target node; Figure 2(c) measures node importance based on the corresponding global attention scores in Polynormer, which clearly showcases that Polynormer attention scores effectively differentiate those globally important nodes from unimportant ones.
+In Figure 2, higher heatmap values indicate greater importance. Both Figures 2(a) and 2(b) consider nodes are important if they share the same label as the target node, while Figure 2(a) has an additional constraint that these nodes are at most 5-hop away from the target node; Figure 2(c) measures node importance based on the corresponding global attention scores in Polynormer, which clearly showcases that Polynormer attention scores effectively differentiate those globally important nodes from unimportant ones.
 
 
 
